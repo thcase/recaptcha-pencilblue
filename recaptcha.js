@@ -1,4 +1,9 @@
-
+/**
+ * Google ReCaptcha for PencilBlue Plugin
+ * @copyright Thomas H Case 2015 
+ * @author Thomas H Case
+ * @license This code is licensed under MIT license (see the LICENSE file for details)
+ */
 module.exports = function ReCaptchaModule(pb) {
 
     //pb dependencies

@@ -16,11 +16,11 @@ git clone https://github.com/thcase/recaptcha-pencilblue.git
 ^recaptcha_script^
 ```
 5. In your controller, include the ReCaptchaService, by including the following command where you setup your dependencies.
-```
+```javascript
 var ReCaptchaService = PluginService.getService('ReCaptchaService','recaptcha-pencilblue');
 ```
 6. To validate the ReCaptcha response, call the ReCaptchaService's validateResponse function passing in the POST variables and a callback function.  The callback function returns an error object as its first parameter, and a result (true/false) of whether the ReCaptcha validated. The following example is using the API Controller methods. See the PencilBlue Contact Page plugin for complete code for processing Contact form submittal via the API Controller.
-```
+```javascript
 this.getJSONPostParams(function(err, post) {
 	if(util.isError(err)) {
 		cb({
