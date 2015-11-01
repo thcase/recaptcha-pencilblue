@@ -1,0 +1,32 @@
+{
+    "uid": "recaptcha-pencilblue",
+    "name": "Google reCAPTCHA Plugin for PencilBlue",
+    "description": "Adds a Google reCAPTCHA to the site.",
+    "version": "0.1.0",
+    "pb_version": "0.4.x",
+    "author": {
+        "name": "Thomas H. Case",
+		"email": "thomas@thcase.com",
+		"website": "http://thcase.com",
+		"contributors": []
+    },
+    "settings": [
+        {
+            "name": "google_recaptcha_site_key",
+            "value": ""
+        },
+        {
+            "name": "google_recaptcha_secret_key",
+            "value": ""
+        }
+    ],
+    "permissions": {
+        "ACCESS_USER": [],
+        "ACCESS_WRITER": [],
+        "ACCESS_EDITOR": [],
+        "ACCESS_MANAGING_EDITOR": []
+    },
+    "main_module": {
+        "path": "recaptcha.js"
+    }
+}

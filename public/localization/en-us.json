@@ -1,0 +1,4 @@
+{
+	"RECAPTCHA_SUCCESS":"ReCaptcha: Verified",
+	"RECAPTCHA_FAIL":"ReCaptcha: Not Verified"
+}
