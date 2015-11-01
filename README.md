@@ -29,33 +29,34 @@ Google ReCaptcha Plugin for PencilBlue.  Use to display ReCAPTCHA on forms.
 	
 6. To validate the ReCaptcha response, call the ReCaptchaService's validateResponse function passing in the POST variables and a callback function.  The callback function returns an error object as its first parameter, and a result (true/false) of whether the ReCaptcha validated. The following example is using the API Controller methods. See the PencilBlue Contact Page plugin for complete code for processing Contact form submittal via the API Controller.
 
-        ```javascript
-        this.getJSONPostParams(function(err, post) {
-            if(util.isError(err)) {
-            	cb({
-            			code: 400,
-            			content: pb.BaseController.apiResponse(pb.BaseController.API_ERROR, err.message)
-            		});
-            	return;
-            }
-            ReCaptchaService.validateResponse(post,function(err,result){
-            	if(util.isError(err)){
-            		cb({
-            			code: 400,
-            			content: pb.BaseController.apiResponse(pb.BaseController.API_ERROR, self.ls.get('RECAPTCHA_FAIL'))
-            		});
-            		return;
-            	} else {
-            		var message = self.hasRequiredParams(post, ['first_name','last_name','email', 'message']);
-            		if(message) {
-            			cb({
-            				code: 400,
-            				content: pb.BaseController.apiResponse(pb.BaseController.API_ERROR, message)
-            			});
-            			return;
-            		};
-            		/// Process form here (e.g., submit to DB, send email, ...)
-            	}
-            });
-        });
-        ```
+	```javascript
+	this.getJSONPostParams(function(err, post) {
+	    if(util.isError(err)) {
+	    	cb({
+	    			code: 400,
+	    			content: pb.BaseController.apiResponse(pb.BaseController.API_ERROR, err.message)
+	    		});
+	    	return;
+	    }
+	    ReCaptchaService.validateResponse(post,function(err,result){
+	    	if(util.isError(err)){
+	    		cb({
+	    			code: 400,
+	    			content: pb.BaseController.apiResponse(pb.BaseController.API_ERROR, self.ls.get('RECAPTCHA_FAIL'))
+	    		});
+	    		return;
+	    	} else {
+	    		var message = self.hasRequiredParams(post, ['first_name','last_name','email', 'message']);
+	    		if(message) {
+	    			cb({
+	    				code: 400,
+	    				content: pb.BaseController.apiResponse(pb.BaseController.API_ERROR, message)
+	    			});
+	    			return;
+	    		};
+	    		/// Process form here (e.g., submit to DB, send email, ...)
+	    	}
+	    });
+	});
+	```
+If you have any issues, please submit via the issues link on github.
