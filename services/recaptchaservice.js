@@ -7,14 +7,14 @@
 //dependencies
 var https = require('https');
 
-module.exports = function(pb) {
+module.exports = function (pb) {
   //Dependencies
-  var util          = pb.util
+  var util = pb.util;
   var PluginService = pb.PluginService;
   var pluginService = new PluginService();
 
   // Initialize the service object
-  function ReCaptchaService() {};
+  function ReCaptchaService() { };
 
   /**
 	* The name the service
@@ -27,7 +27,7 @@ module.exports = function(pb) {
   var SERVICE_NAME = 'ReCaptchaService'; 
 	
   // This function will be called when PencilBlue loads the service
-  ReCaptchaService.init = function(cb) {
+  ReCaptchaService.init = function (cb) {
     pb.log.debug(SERVICE_NAME + ": Initialized");
     cb(null, true);
   };
@@ -42,8 +42,8 @@ module.exports = function(pb) {
 	* @method getName
 	* @return {String} The service name
 	*/
-  ReCaptchaService.getName = function() {
-	return SERVICE_NAME;
+  ReCaptchaService.getName = function () {
+    return SERVICE_NAME;
   };
   
   /**
@@ -71,41 +71,41 @@ module.exports = function(pb) {
    * @param data Post Data
    * @param {function}cb Callback in format of (err,result)
    */
-  ReCaptchaService.validateResponse = function(data,cb) {
+  ReCaptchaService.validateResponse = function (data, cb) {
     var key = data["g-recaptcha-response"];
-    if(key) {
-      pluginService.getSetting(RECAPTCHA_PRIVATE_KEY_SETTING_NAME,PLUGIN_NAME,function(err,privateKey){
-        if(util.isError(err)){
-          cb(err,false);
+    if (key) {
+      pluginService.getSetting(RECAPTCHA_PRIVATE_KEY_SETTING_NAME, PLUGIN_NAME, function (err, privateKey) {
+        if (util.isError(err)) {
+          cb(err, false);
         }
         var url = "https://www.google.com/recaptcha/api/siteverify?secret=" + privateKey + "&response=" + key;
-        https.get(url,function(res){
+        https.get(url, function (res) {
           var data = "";
-          res.on('data',function(chunk){
+          res.on('data', function (chunk) {
             data += chunk.toString();
           });
-          res.on('end',function(){
+          res.on('end', function () {
             try {
               var parsedData = JSON.parse(data);
-              if(parsedData.success){
-                cb(null,parsedData.success);
+              if (parsedData.success) {
+                cb(null, parsedData.success);
               } else {
                 var msg = "The following errors occurred: ";
-                msg += parsedData.error-codes.join();
+                msg += parsedData['error-codes'].join();
                 var err = new Error(msg);
-                cb(err,parsedData.success);
+                cb(err, parsedData.success);
               }
-            } catch(err) {
-              cb(err,false);
+            } catch (err) {
+              cb(err, false);
             }
           });
         });
       });
     } else {
-      var err = new Error("ReCaptcha respose not present");
-      cb(err,null);
+      var err = new Error("ReCaptcha response not present");
+      cb(err, null);
     }
   };
-  
+
   return ReCaptchaService;
 };

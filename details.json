@@ -2,7 +2,7 @@
     "uid": "recaptcha-pencilblue",
     "name": "Google reCAPTCHA Plugin for PencilBlue",
     "description": "Adds a Google reCAPTCHA to the site.",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "pb_version": "0.4.x",
     "author": {
         "name": "Thomas H. Case",
