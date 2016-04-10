@@ -32,25 +32,21 @@ Google ReCaptcha Plugin for PencilBlue.  Use to display ReCAPTCHA on forms.
 	    		});
 	    	return;
 	    }
-	    PluginService.getService('ReCaptchaService','recaptcha-pencilblue').validateResponse(post,function(err,result){
-	    	if(util.isError(err)){
-	    		cb({
-	    			code: 400,
-	    			content: pb.BaseController.apiResponse(pb.BaseController.API_ERROR, self.ls.get('RECAPTCHA_FAIL'))
-	    		});
-	    		return;
-	    	} else {
-	    		var message = self.hasRequiredParams(post, ['first_name','last_name','email', 'message']);
-	    		if(message) {
-	    			cb({
-	    				code: 400,
-	    				content: pb.BaseController.apiResponse(pb.BaseController.API_ERROR, message)
-	    			});
-	    			return;
-	    		};
-	    		/// Process form here (e.g., submit to DB, send email, ...)
-	    	}
-	    });
+        if(PluginService.isActivePlugin('recaptcha-pencilblue')){
+            PluginService.getService('ReCaptchaService','recaptcha-pencilblue').validateResponse(post,function(err,result){
+                if(util.isError(err)){
+                    cb({
+                        code: 400,
+                        content: pb.BaseController.apiResponse(pb.BaseController.API_ERROR, self.ls.get('RECAPTCHA_FAIL'))
+                    });
+                    return;
+                } else {
+                    /// Process form here (e.g., submit to DB, send email, ...)
+                }
+            });
+        } else {
+            /// Process form here (e.g., submit to DB, send email, ...)
+        }
 	});
 	```
 If you have any issues, please submit via the issues link on github.
