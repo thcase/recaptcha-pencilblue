@@ -1,6 +1,7 @@
 # recaptcha-pencilblue
 Google ReCaptcha Plugin for PencilBlue.  Use to display ReCAPTCHA on forms.
-##Installation and Setup
+
+## Installation and Setup
 1. Clone the recaptcha-pencilblue repository into the plugins folder of your PencilBlue installation
 
 	```
